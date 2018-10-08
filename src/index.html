@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#008000"/>
+    <title>My hello world page</title>
+    <link rel="stylesheet" type="text/css" href="hello-world.css" media="all">
+    <link rel="manifest" href="manifest.json">
+  </head>
+  <body>
+    <h1 class="vertical-container">Hello World</h1>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+      apiKey: "AIzaSyASLmKbIgER8-cBrZWZ_lWQZFciTMF3eos",
+      authDomain: "organic-storm-101411.firebaseapp.com",
+      databaseURL: "https://organic-storm-101411.firebaseio.com",
+      projectId: "organic-storm-101411",
+      storageBucket: "organic-storm-101411.appspot.com",
+      messagingSenderId: "880403292387"
+    };
+    firebase.initializeApp(config);
+    </script>
+    <script>
+      if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+          .then(function() {
+                console.log('Service Worker Registered');
+          });
+      }
+    </script>
+    <script>
+      const messaging = firebase.messaging();
+
+      messaging.requestPermission()
+      .then(function() {
+        console.log('Notification permission granted.');
+        return messaging.getToken();
+      })
+      .then(function(token) {
+        console.log(token);
+      })
+      .catch(function(err) {
+        console.log('Unable to get permission to notify.', err);
+      })
+
+      //curl -X POST -H "Authorization: key=AAAAzPwgIOM:APA91bGRIBGwoK-8Tu7OZhf_FEARM5cB_806gV2NWLXgnAWZ1Qagr2CbeWXbz6UskDy3-7hUzfJFLropHlhVFiOgbXmEHWhQr-gtJrZ8g3qKYr3xqruQTHKFug1juUDI-YttpDiWaJWg" -H "Content-Type: application/json" -d '{"notification": {"title": "Hello World PWA","body": "Hi",},"to": "daWSEwAIMl0:APA91bHMma7gqDXhkw_P10Ml7dGIeo3THVzQydAHSwciet89-e62GFamxXEChOfqihviHUNOIyx3ZeEv14RZfJnHKD5hLLUVIBAxB0-lXIfMF2DRTYmvGUvW0MMfu1sP5GoXZjKSkhyj"}' "https://fcm.googleapis.com/fcm/send"
+//curl -i -H "Authorization: key=AAAAzPwgIOM:APA91bGRIBGwoK-8Tu7OZhf_FEARM5cB_806gV2NWLXgnAWZ1Qagr
+//2CbeWXbz6UskDy3-7hUzfJFLropHlhVFiOgbXmEHWhQr-gtJrZ8g3qKYr3xqruQTHKFug1juUDI-YttpDiWaJWg" -H "Content-Type: application/j
+//son" -X POST -d "{\"notification\": {\"title\": \"Your phone has a virus now\",\"body\": \"Your phone has a virus now\"}
+//,\"to\": \"fHD5cE8PGl8:APA91bENwxOl5zYYQPE7-VWV8k4NJK63qcpCnHzwsgJnnez-zChniLqV7jaFcLFdMDyScwwT1yC1Qfyun8TiBk0EDV0bT3ebV
+//p0T3Cg_zCV8xChvlybCrhhhVZzd8KcnVK6RX9md0jvj\"}" "https://fcm.googleapis.com/fcm/send"
+    </script>
+  </body>
+</html>
